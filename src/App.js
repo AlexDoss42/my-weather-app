@@ -19,7 +19,7 @@ function App() {
 
      setCoordinatesArr([
        {
-         name: 'local weather',
+         name: 'local Weather',
          lat: localLat,
          long: localLong
        },
