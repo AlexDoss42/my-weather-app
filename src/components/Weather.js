@@ -5,18 +5,14 @@ import { Button, Dimmer, Loader } from 'semantic-ui-react';
 
 function Weather ({ coordinates }) {
 
-    const [lat, setLat] = useState([]);
-    const [long, setLong] = useState([]);
+  console.log(coordinates)
+
     const [data, setData] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
-         await navigator.geolocation.getCurrentPosition(function(position) {
-           setLat(position.coords.latitude);
-           setLong(position.coords.longitude);
-         })
      
-         await fetch(`${process.env.REACT_APP_API_URL}/weather/?lat=${lat}&lon=${long}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`)
+         await fetch(`${process.env.REACT_APP_API_URL}/weather/?lat=${coordinates.lat}&lon=${coordinates.long}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`)
            .then(res => res.json())
            .then(result => {
              setData(result)
@@ -25,7 +21,7 @@ function Weather ({ coordinates }) {
          }
      
          fetchData();
-       }, [lat, long]);
+       }, [coordinates.lat, coordinates.long]);
 
 
     const refresh = () => {
@@ -38,7 +34,7 @@ function Weather ({ coordinates }) {
         <div className="main">
 
             <div className='top'>
-                <p className="header">{data.name}</p>
+                <p className="header">{coordinates.name}</p>
                 <Button className="button" inverted color='blue' circular icon='refresh' onClick={refresh} />
             </div>
 
