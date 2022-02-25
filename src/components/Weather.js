@@ -24,10 +24,6 @@ function Weather ({ coordinates }) {
        }, [coordinates.lat, coordinates.long]);
 
 
-    const refresh = () => {
-        window.location.refresh();
-    }
-
     return (
       <>
         {(typeof data.main != 'undefined') ? (
@@ -35,7 +31,6 @@ function Weather ({ coordinates }) {
 
             <div className='top'>
                 <p className="header">{coordinates.name}</p>
-                <Button className="button" inverted color='blue' circular icon='refresh' onClick={refresh} />
             </div>
 
             <div className="flex">
