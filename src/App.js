@@ -8,6 +8,13 @@ function App() {
   const [localLat, setLocalLat] = useState([]);
   const [localLong, setLocalLong] = useState([]);
   const [coordinatesArr, setCoordinatesArr] = useState([]);
+  const [data, setData] = React.useState(null);
+
+  useEffect(() => {
+    fetch("/api")
+      .then((res) => res.json())
+      .then((data) => setData(data.message));
+  }, []);
 
   useEffect(() => {
      navigator.geolocation.getCurrentPosition(function(position) {
@@ -50,10 +57,11 @@ function App() {
 
   return (
     <div className="App">
+      <p>{!data ? "Loading..." : data}</p>            
       {
         coordinatesArr.map((coordinates) => {
           return (
-            <Weather coordinates={coordinates} />
+            <Weather coordinates={coordinates} key={coordinates.name} />
           )
         })
       }
