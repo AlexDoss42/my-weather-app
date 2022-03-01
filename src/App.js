@@ -2,7 +2,6 @@ import './App.css';
 import React, { useEffect, useState } from 'react';
 import Weather from './components/Weather';
 
-
 function App() {
 
   const [localLat, setLocalLat] = useState([]);
@@ -11,17 +10,13 @@ function App() {
   const [data, setData] = React.useState(null);
 
   useEffect(() => {
-    fetch("/api")
-      .then((res) => res.json())
-      .then((data) => setData(data.message));
+    fetch("/api").then((res) => res.json()).then((data) => setData(data.message));
   }, []);
 
   useEffect(() => {
      navigator.geolocation.getCurrentPosition(function(position) {
        setLocalLat(position.coords.latitude);
        setLocalLong(position.coords.longitude);
-
-       console.log(localLat, typeof(localLat));
      })
 
      setCoordinatesArr([
@@ -65,7 +60,7 @@ function App() {
           )
         })
       }
- </div>
+    </div>
   );
 }
 
