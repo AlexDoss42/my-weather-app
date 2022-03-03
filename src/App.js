@@ -10,6 +10,7 @@ function App() {
   const [data, setData] = React.useState(null);
 
   useEffect(() => {
+    console.log(fetch("/api"))
     fetch("/api").then((res) => res.json()).then((data) => setData(data.message));
   }, []);
 

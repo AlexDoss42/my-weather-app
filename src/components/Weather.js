@@ -5,8 +5,6 @@ import { Dimmer, Loader } from 'semantic-ui-react';
 
 function Weather ({ coordinates }) {
 
-  console.log(coordinates)
-
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -16,7 +14,6 @@ function Weather ({ coordinates }) {
            .then(res => res.json())
            .then(result => {
              setData(result)
-             console.log(result);
            });
          }
      
