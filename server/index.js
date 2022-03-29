@@ -1,15 +1,36 @@
 const path = require('path');
 const express = require('express');
+const axios = require('axios');
 const PORT = process.env.PORT || 3001;
 const app = express();
-
-// Have Node serve the files for our built React app
-// app.use(express.static(path.resolve(__dirname, '../client/build')));
+require('dotenv').config();
 
 // Handle GET requests to /api route
 app.get("/api", (req, res) => {
-  res.json({ message: "Hello from server!" });
+    console.log(1234, 'Server hit!')
+    res.json("hellos world!")
+//   res.json({ message: "Hello from server!" });
 });
+
+// Get a location
+
+const params = {
+  access_key: process.env.GEOCODING_ACCESS_KEY,
+  query: '1600 Pennsylvania Ave NW'
+}
+
+axios.get("http://api.positionstack.com/v1/forward", {params}).then(response => {
+  console.log(response.data);
+}).catch(error => {
+  console.log(error);
+});
+
+// Add location to list
+
+// Delete location from list
+
+// query weather at all of your locations
+
 
 // All other GET requests not handled before will return our React app
 app.get('*', (req, res) => {
